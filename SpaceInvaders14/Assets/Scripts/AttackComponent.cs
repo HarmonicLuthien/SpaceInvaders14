@@ -12,12 +12,31 @@ public class AttackComponent : MonoBehaviour
     [SerializeField]
     private Vector2 direction;
     [SerializeField]
-    private float firingSpeed;
-    private float elapsedTime;
+    private float firingCooldown;
+    private float remainingTime;
+
 
     public void Fire()
     {
-        // PENDIENTE
+        // Verifica que haya transcurrido el tiempo establecido para el intervado entre disparos.
+        if (remainingTime == 0)
+        {
+            GameObject projectileToBeFired = GetAProjectile();
+            projectileToBeFired.transform.position = transform.position;
+            projectileToBeFired.GetComponent<Rigidbody2D>().velocity = direction * loadedProjectile.GetSpeed();
+            StartCoroutine(StartCountdown());
+        }
+    }
+
+    private IEnumerator StartCountdown()
+    {
+        // Método para cronometración del intervalo entre disparos.
+        float remainingTime = firingCooldown;
+        while (remainingTime > 0)
+        {
+            yield return new WaitForSeconds(1.0f);
+            remainingTime = Mathf.Clamp(remainingTime--, 0f, firingCooldown);
+        }
     }
 
     public GameObject GetAProjectile()
