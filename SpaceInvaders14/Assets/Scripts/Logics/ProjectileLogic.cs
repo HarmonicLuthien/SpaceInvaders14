@@ -18,11 +18,9 @@ public class ProjectileLogic : MonoBehaviour
         {
             case "ProjBarrier":
             gameObject.SetActive(false);
-            Debug.Log("I got the death barrier");
             return;
 
             default:
-            Debug.Log("I got NOTHING");
             return;
         }
     }

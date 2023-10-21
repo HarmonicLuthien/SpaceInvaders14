@@ -4,17 +4,21 @@ using UnityEngine;
 
 public class AlienMatrixGenerator : MonoBehaviour
 {
-    public GameObject alienPrefab; // Referencia
-    public int rows = 5; // Número de filas
-    public int columns = 10; // Número de columnas
-    public float spacing = 1.0f; // Espaciado
+    [SerializeField]
+    private GameObject alienPrefab; // Referencia
+    [SerializeField]
+    private int rows = 5; // Número de filas
+    [SerializeField]
+    private int columns = 10; // Número de columnas
+    [SerializeField]
+    private float spacing = 1.0f; // Espaciado
 
-    void Awake()
+    private void Awake()
     {
         GenerateAlienMatrix();
     }
 
-    void GenerateAlienMatrix()
+    private void GenerateAlienMatrix()
     {
         for (int row = 0; row < rows; row++)
         {
