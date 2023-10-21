@@ -26,6 +26,9 @@ SpaceInvaders14/[Aa]ssets/Plugins/Editor/JetBrains*
 # Visual Studio cache directory
 SpaceInvaders14/SpaceInvaders14.vs/
 
+# Archivos de Visual Studio Code
+SpaceInvaders14/.vscode/
+
 # Gradle cache directory
 SpaceInvaders14/.gradle/
 
