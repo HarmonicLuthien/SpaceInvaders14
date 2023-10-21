@@ -20,6 +20,8 @@ public class ProjectileLogic : MonoBehaviour
             gameObject.SetActive(false);
             return;
 
+            // WIP
+
             default:
             return;
         }
