@@ -22,8 +22,13 @@ public class AttackComponent : MonoBehaviour
         if (remainingTime == 0)
         {
             GameObject projectileToBeFired = GetAProjectile();
+            projectileToBeFired.SetActive(true);
+
             projectileToBeFired.transform.position = transform.position;
-            projectileToBeFired.GetComponent<Rigidbody2D>().velocity = direction * loadedProjectile.GetSpeed();
+            ProjectileLogic currentProjLogic = projectileToBeFired.GetComponent<ProjectileLogic>();
+            projectileToBeFired.GetComponent<Rigidbody2D>().velocity = loadedProjectile.GetSpeed() * direction;
+            currentProjLogic.Damage = loadedProjectile.GetDamage();
+
             StartCoroutine(StartCountdown());
         }
     }
@@ -32,11 +37,12 @@ public class AttackComponent : MonoBehaviour
     {
         // Método para cronometración del intervalo entre disparos.
         float remainingTime = firingCooldown;
-        while (remainingTime > 0)
+        while (remainingTime > 0f)
         {
             yield return new WaitForSeconds(1.0f);
-            remainingTime = Mathf.Clamp(remainingTime--, 0f, firingCooldown);
+            remainingTime--;
         }
+        remainingTime = 0f;
     }
 
     public GameObject GetAProjectile()

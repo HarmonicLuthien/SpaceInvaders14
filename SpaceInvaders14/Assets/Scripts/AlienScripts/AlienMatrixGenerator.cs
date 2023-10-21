@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class AlienMatrixGenerator : MonoBehaviour
 {
-    public GameObject alienPrefab; // Reference to the alien prefab
-    public int rows = 5; // Number of rows
-    public int columns = 10; // Number of columns
-    public float spacing = 1.0f; // Spacing between aliens
+    public GameObject alienPrefab; // Referencia
+    public int rows = 5; // Número de filas
+    public int columns = 10; // Número de columnas
+    public float spacing = 1.0f; // Espaciado
 
-    void Start()
+    void Awake()
     {
         GenerateAlienMatrix();
     }
@@ -20,11 +20,11 @@ public class AlienMatrixGenerator : MonoBehaviour
         {
             for (int col = 0; col < columns; col++)
             {
-                // Calculate the position for each alien in the matrix
+                // Calcula la posición para cada elemento en la matriz
                 float xPos = col * spacing;
                 float yPos = row * spacing;
 
-                // Instantiate an alien prefab at the calculated position
+                // Instancía una prefab en cada posición
                 Vector3 position = transform.position + new Vector3(xPos, yPos, 0);
                 Instantiate(alienPrefab, position, Quaternion.identity, transform);
             }

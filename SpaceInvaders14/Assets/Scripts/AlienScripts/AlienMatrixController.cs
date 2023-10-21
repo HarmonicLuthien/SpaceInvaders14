@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class AlienMatrixController : MonoBehaviour
 {
-    public float moveSpeed = 1.0f;       // Speed at which aliens move
-    public float dropDistance = 1.0f;    // Distance to drop when reaching the screen edge
+    public float moveSpeed = 1.0f;       // Rapidez de movimiento
+    public float dropDistance = 1.0f;    // Distancia de descenso al tocar un borde
 
-    private bool movingRight = true;     // True if aliens are moving right
+    private bool movingRight = true;     // Verdadero si se mueven a la derecha
 
     void Update()
     {
@@ -18,23 +18,23 @@ public class AlienMatrixController : MonoBehaviour
     {
         Vector3 direction = movingRight ? Vector3.right : Vector3.left;
 
-        // Move the entire matrix
-        transform.Translate(direction * moveSpeed * Time.deltaTime);
+        // Mueve la matriz en su totalidad
+        transform.Translate(moveSpeed * Time.deltaTime * direction);
 
-        // Check if aliens have reached the screen edge
+        // Revisa si ha llegado al borde
         if (AliensReachedEdge())
         {
-            // Drop the matrix by the specified distance
+            // Baja la matriz en una distancia especifica
             transform.Translate(Vector3.down * dropDistance);
 
-            // Invert the movement direction
+            // Invierte el movimiento de la matriz
             movingRight = !movingRight;
         }
     }
 
     bool AliensReachedEdge()
     {
-        // Check if any alien's position is outside the screen boundary
+        // Revisa si cualquier posisión de la matriz se encuentra fuera de la cámara
         foreach (Transform alien in transform)
         {
             if (alien.position.x >= 25f || alien.position.x <= -25f)
