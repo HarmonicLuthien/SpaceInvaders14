@@ -38,7 +38,7 @@ public class AttackComponent : MonoBehaviour
     private IEnumerator StartCountdown()
     {
         // Método para cronometración del intervalo entre disparos.
-        float remainingTime = firingCooldown;
+        remainingTime = firingCooldown;
         while (remainingTime > 0f)
         {
             yield return new WaitForSeconds(1.0f);
