@@ -6,15 +6,17 @@ public class AttackComponent : MonoBehaviour
 {
     [SerializeField]
     private ProjectileTypeSO loadedProjectile;
-    [SerializeField]
-    private GameObject projectileContainer;
-    private List<GameObject> projectilePool = new();
+    private ProjectilePool projectilePool;
     [SerializeField]
     private Vector2 direction;
     [SerializeField]
     private float firingCooldown;
     private float remainingTime;
 
+    private void Awake()
+    {
+        projectilePool = FindAnyObjectByType<ProjectilePool>();
+    }
 
     public void Fire()
     {
@@ -45,10 +47,10 @@ public class AttackComponent : MonoBehaviour
         remainingTime = 0f;
     }
 
-    public GameObject GetAProjectile()
+    private GameObject GetAProjectile()
     {
         // Itera cada elemento en la lista de proyectos
-        foreach (GameObject projectile in projectilePool)
+        foreach (GameObject projectile in projectilePool.pool)
         {
             // En caso de encontrar un objeto desactivado, retornar dicho objecto
             if (!projectile.activeSelf)
@@ -63,8 +65,8 @@ public class AttackComponent : MonoBehaviour
 
     private GameObject InstantiateProjectile()
     {
-        GameObject newProjectile = Instantiate(loadedProjectile.GetPrefab(), projectileContainer.transform);
-        projectilePool.Add(newProjectile);
+        GameObject newProjectile = Instantiate(loadedProjectile.GetPrefab(), projectilePool.gameObject.transform);
+        projectilePool.pool.Add(newProjectile);
         return newProjectile;
     }
 }
